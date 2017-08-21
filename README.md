@@ -1,3 +1,9 @@
 # Simple and lightweight password generator in CSS/HTML/JS. Just in case somebody else than me gonna use it.
 ## Usage
-All you need to do is run `index.html`, it will open in your browser, the rest of it you will understand.
+__Step 1:__ Open [This page](https://bckr75.github.io/passgen/).
+
+__Step 2:__ Pick the options, set password length, bang 'generate'.
+### I want to clone this repo
+Run `index.html`.
+
+Return to __Step 2__.
