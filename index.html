@@ -6,13 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <style>
+    * {
+        box-sizing: border-box;
+    }
     body {
         text-align: center;
-        font-family: Verdana, sans-serif;
+        font-weight: 400;
+        font-family: Courier New, sans-serif;
         margin: 0;
     }
     header {
-    	background: #efefef; width: 100%; padding: 20px 0
+    	width: 100%; 
+        padding: 1rem 0;
     }
     header > h1 {
     	margin: 0;
@@ -26,14 +31,24 @@
         width: 100%;
         text-align: center;
         outline: none;
+
     }
     input[type=checkbox] {
     	height: 1.4em;
+    }
+    input[type=text], input[type=number] {
+        box-shadow: inset 0px 0px 5px 0px #bbbbbb;
     }
     button {
         margin-top: 15px;
         padding: 10px;
         font-size: 20px;
+        box-shadow: inset 1px -1px 4px 2px #bbbbbb, 
+                          4px 4px 10px 0px #bbbbbb;
+        font-family: Courier New, sans-serif;
+    }
+    button:active {
+        box-shadow: inset 3px 2px 5px 3px #bbbbbb;
     }
     label {
         font-size: 22px;
@@ -49,40 +64,42 @@
     }
 </style>
 <body>
-<div style="width: 100%;">
-    <header><h1>Password generator</h1></div>
-    <form id="form" class="responsive" onsubmit="return generatePassword(document.getElementById('length').value, document.getElementById('useSC').checked);">
-        <div>
-            <label>Set password length<input id="length" value="8" type="number" min="6" onmousewheel></label>
-        </div>
-        <div>
-            <label>Use special characters(e.g. !@#$%^)<input type="checkbox" id="useSC"></label>
-        </div>
-        <button onclick="generatePassword(document.getElementById('length').value, document.getElementById('useSC').checked);">Generate!</button>
-        <div id="target"></div>
+    <div style="width: 100%; box-shadow: 5px 5px 20px 2px #a7a7a7;">
+        <header><h1>Password generator</h1></header>
     </div>
-</div>
-<script type="text/javascript">
-    generatePassword = function(length, useSpecialChars) {
-        var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-        	retVal = "",
-            inputForGeneratedPswrd = document.getElementById('generated');
-        if(useSpecialChars) {
-        	charset += "!@#$%^&*()_+-={}[]|;':,.<>/?`~";
+    <div style="padding: 1rem 0;">
+        <form id="form" class="responsive" onsubmit="return generatePassword(document.getElementById('length').value, document.getElementById('useSC').checked);">
+            <div>
+                <label>Password length<input id="length" value="8" type="number" min="6" onmousewheel></label>
+            </div>
+            <div>
+                <label>Use special characters(e.g. !@#$%^)<input type="checkbox" id="useSC"></label>
+            </div>
+            <button onclick="generatePassword(document.getElementById('length').value, document.getElementById('useSC').checked);">Generate!</button>
+            <div id="target"></div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        generatePassword = function(length, useSpecialChars) {
+            var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+            	retVal = "",
+                inputForGeneratedPswrd = document.getElementById('generated');
+            if(useSpecialChars) {
+            	charset += "!@#$%^&*()_+-={}[]|;':,.<>/?`~";
+            }
+            for (var i = 0, n = charset.length; i < length; ++i) {
+                retVal += charset.charAt(Math.floor(Math.random() * n));
+            }
+            if(!inputForGeneratedPswrd) {
+                inputForGeneratedPswrd = document.createElement('input');
+                inputForGeneratedPswrd.setAttribute('type', 'text');
+                inputForGeneratedPswrd.setAttribute('id', 'generated');
+                document.getElementById('target').appendChild(inputForGeneratedPswrd);
+            }
+            inputForGeneratedPswrd.setAttribute('value', retVal);
+            inputForGeneratedPswrd.setAttribute('onfocus', "this.setSelectionRange(0, this.value.length)");
+            return false;
         }
-        for (var i = 0, n = charset.length; i < length; ++i) {
-            retVal += charset.charAt(Math.floor(Math.random() * n));
-        }
-        if(!inputForGeneratedPswrd) {
-            inputForGeneratedPswrd = document.createElement('input');
-            inputForGeneratedPswrd.setAttribute('type', 'text');
-            inputForGeneratedPswrd.setAttribute('id', 'generated');
-            document.getElementById('target').appendChild(inputForGeneratedPswrd);
-        }
-        inputForGeneratedPswrd.setAttribute('value', retVal);
-        inputForGeneratedPswrd.setAttribute('onfocus', "this.setSelectionRange(0, this.value.length)");
-        return false;
-    }
-</script>
+    </script>
 </body>
 </html>
