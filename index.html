@@ -25,6 +25,7 @@
         border: 1px solid #ccc;
         width: 100%;
         text-align: center;
+        outline: none;
     }
     input[type=checkbox] {
     	height: 1.4em;
@@ -50,7 +51,7 @@
 <body>
 <div style="width: 100%;">
     <header><h1>Password generator</h1></div>
-    <div class="responsive">
+    <form id="form" class="responsive" onsubmit="return generatePassword(document.getElementById('length').value, document.getElementById('useSC').checked);">
         <div>
             <label>Set password length<input id="length" value="8" type="number"></label>
         </div>
@@ -80,7 +81,7 @@
         }
         inputForGeneratedPswrd.setAttribute('value', retVal);
         inputForGeneratedPswrd.setAttribute('onfocus', "this.setSelectionRange(0, this.value.length)");
-        return retVal;
+        return false;
     }
 </script>
 </body>
