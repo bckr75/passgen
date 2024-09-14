@@ -53,7 +53,7 @@
     <header><h1>Password generator</h1></div>
     <form id="form" class="responsive" onsubmit="return generatePassword(document.getElementById('length').value, document.getElementById('useSC').checked);">
         <div>
-            <label>Set password length<input id="length" value="8" type="number"></label>
+            <label>Set password length<input id="length" value="8" type="number" min="6" onmousewheel></label>
         </div>
         <div>
             <label>Use special characters(e.g. !@#$%^)<input type="checkbox" id="useSC"></label>
